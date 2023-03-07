@@ -1,0 +1,25 @@
+plugins {
+    id 'java'
+    id 'org.springframework.boot' version "${springBoot}"
+    id 'io.spring.dependency-management' version "${dependencyManagement}"
+}
+
+sourceCompatibility = 11
+targetCompatibility = 11
+    
+repositories {
+    mavenCentral()
+}
+
+dependencies {
+    implementation 'net.coobird:thumbnailator:0.4.19'
+    implementation 'org.springframework.boot:spring-boot-starter-webflux'
+    testImplementation     'junit:junit:4.13'
+}
+
+task copyJar(type: Copy) {
+    from bootJar // copies output of file produced from jar task
+    into 'bin'
+}
+
+build.finalizedBy copyJar
